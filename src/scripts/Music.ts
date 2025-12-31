@@ -11,7 +11,8 @@ export default async (MusicList: any[]) => {
   musicDOM.forEach(async (container: any) => {
     const { type = 'song', server = 'netease', id } = container.dataset;
     const audio = await $GET(`${vhMusicApi}?server=${server}&type=${type}&id=${id}&r=${Math.random()}`);
-    const ap = new APlayer({ container, audio, lrcType: 3 });
+    // 新增 log: false 关闭控制台日志打印
+    const ap = new APlayer({ container, audio, lrcType: 3, log: false });
     MusicList.push(ap);
   });
 };
