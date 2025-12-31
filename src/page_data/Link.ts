@@ -4,16 +4,13 @@ export default {
   // api 为空则使用 data 静态数据
   data: [
     {
-      "name": "韩小韩博客",
-      "link": "https://www.vvhan.com",
-      "avatar": "https://q1.qlogo.cn/g?b=qq&nk=1655466387&s=640",
-      "descr": "运气是计划之外的东西."
+      "name": "海阔图床",
+      "link": "https://img.167891.xyz/",
+      "avatar": "https://img.167891.xyz/assets/logo-3FdGxyKZ.webp",
+      "descr": "我思故我在."
     },
     {
-      "name": "韩小韩API",
-      "link": "https://api.vvhan.com",
-      "avatar": "https://api.vvhan.com/static/images/logo.webp",
-      "descr": "免费Web API数据接口调用服务平台."
+      
     }
   ]
 }
