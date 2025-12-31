@@ -2,7 +2,7 @@ export default {
   // 网站标题
   Title: '旧识桥',
   // 网站地址
-  Site: 'https://www.vvhan.com',
+  Site: 'https://167891.xyz',
   // 网站副标题
   Subtitle: '什么都略懂一点，生活更多彩一些',
   // 网站描述
@@ -10,7 +10,7 @@ export default {
   // 网站作者
   Author: '旧识桥',
   // 作者头像
-  Avatar: 'https://img-bfs.pages.dev/v2/Y8WHMWZ.png',
+  Avatar: 'https://img.167891.xyz/v2/lEEu0hA.png',
   // 网站座右铭
   Motto: 'Cogito ergo sum.',
   // Cover 网站缩略图
