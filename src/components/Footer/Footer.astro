@@ -3,10 +3,27 @@ import "./Footer.less";
 ---
 <footer class="vh-footer">
   <main>
-    <p>©{new Date().getFullYear()} 旧识桥 | 本站稳定运行 <span class="web_time"></span></p>
+    <p>©{new Date().getFullYear()} 韩小韩 | 本站稳定运行 <span class="web_time"></span></p>
     <p>
       <a href="/rss.xml" target="_blank">RSS订阅</a>
       <a href="/sitemap-index.xml" target="_blank">站点地图</a>
     </p>
   </main>
 </footer>
+
+<!-- 运行时间JS，直接加在组件末尾即可 -->
+<script is:inline>
+// 改成你的博客建站日期！格式：年,月-1,日
+const startDate = new Date(2025, 11, 31); 
+
+function updateRunTime() {
+  const now = new Date();
+  const diff = now - startDate;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  document.querySelector('.web_time').textContent = `${days}天${hours}时${minutes}分`;
+}
+updateRunTime();
+setInterval(updateRunTime, 60000); // 每分钟更新一次
+</script>
