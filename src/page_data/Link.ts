@@ -9,8 +9,8 @@ export default {
       "avatar": "https://img.167891.xyz/assets/logo-3FdGxyKZ.webp",
       "descr": "我思故我在."
     },
-    {
-      
-    }
+//    {
+ //
+ //   }
   ]
 }
