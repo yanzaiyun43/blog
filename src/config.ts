@@ -8,7 +8,7 @@ export default {
   // 网站描述
   Description: '旧识桥博客，旧识桥，博客也分享作者的生活、音乐和旅行的热爱。',
   // 网站作者
-  Author: '旧识桥',
+  Author: 'ailmel',
   // 作者头像
   Avatar: 'https://img.167891.xyz/v2/lEEu0hA.png',
   // 网站座右铭
