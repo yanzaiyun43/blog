@@ -14,24 +14,23 @@ import "./Footer.less";
 <!-- 修复后的运行时间JS，加了加载监听+错误防护 -->
 <script is:inline>
 // 改成你的真实建站日期（示例：2025年10月1日）
-const startDate = new Date(2025, 11, 30); 
+const startDate = new Date(2025, 11, 30);   // 月从 0 开始，11 表示 12 月
 
-// 确保DOM加载完成后执行
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const timeElement = document.querySelector('.web_time');
-  // 防止找不到元素报错
   if (!timeElement) return;
 
   function updateRunTime() {
-    const now = new Date();
-    const diff = now - startDate;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    timeElement.textContent = `${days}天${hours}时${minutes}分`;
+    const diff = Date.now() - startDate;
+    const days    = Math.floor(diff / 86400000);
+    const hours   = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
+
+    timeElement.textContent = `${days}天${hours}时${minutes}分${seconds}秒`;
   }
 
   updateRunTime();
-  setInterval(updateRunTime, 60000);
+  setInterval(updateRunTime, 1000); // 每秒刷新
 });
 </script>
