@@ -1,10 +1,6 @@
 <script is:inline>
 // 改成你的真实建站日期（示例：2025年10月1日）
-// 旧：只给到日
-// const startDate = new Date(2025, 11, 30);
-
-// 新：精确到秒（2025-12-30 14:25:30）
-const startDate = new Date(2025, 11, 30, 21, 08, 12);
+const startDate = new Date(2025, 11, 30);   // 月从 0 开始，11 表示 12 月
 
 document.addEventListener('DOMContentLoaded', function () {
   const timeElement = document.querySelector('.web_time');
