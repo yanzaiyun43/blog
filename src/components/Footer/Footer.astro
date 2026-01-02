@@ -32,7 +32,7 @@ import "./Footer.less";
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
 
-      el.textContent = `${d}天${pad(h)}:${pad(m)}:${pad(s)}`;
+      el.textContent = `${d}天${pad(h)}时${pad(m)}分${pad(s)}秒`;
     }
 
     update();
