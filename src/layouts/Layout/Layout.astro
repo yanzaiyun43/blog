@@ -3,12 +3,13 @@ const { title, keywords, description, pagecover, activeNav, Home } = Astro.props
 
 // 网站配置
 import SITE_INFO from "@/config";
-const { GoogleAds, Theme } = SITE_INFO;          // ← 去掉 HomeBanner
+const { GoogleAds, Theme, HomeBanner } = SITE_INFO;   // ← 恢复 HomeBanner
 const { ad_Client, asideAD_Slot, articleAD_Slot } = GoogleAds;
 
 // 组件
 import Head from "@/components/Head/Head.astro";
 import Header from "@/components/Header/Header.astro";
+import MainHeader from "@/components/MainHeader/MainHeader.astro"; // ← 恢复引用
 import Aside from "@/components/Aside/Aside.astro";
 import Footer from "@/components/Footer/Footer.astro";
 import BackTop from "@/components/BackTop/BackTop.astro";
@@ -38,11 +39,13 @@ import "./Layout.less";
     )}
     {/* 彩旗🎈 */}
     <script is:inline src="/assets/js/vhCaiqi.js" defer />
-    {/* 主题颜色变量 */}
+    {/* 主题颜色变量 + 横幅高度/背景 */}
     <Fragment
       set:html={`<style>:root {${Object.entries(Theme)
         .map(([k, v]) => `${k}:${v};`)
-        .join("")}--vh-main-header-height:0;--vh-home-banner:none}</style>`}
+        .join("")}--vh-main-header-height:${
+        HomeBanner.enable ? (Home ? HomeBanner.HomeHeight : HomeBanner.PageHeight) : "0"
+      };--vh-home-banner:${HomeBanner.background}}</style>`}
     />
   </Head>
 
@@ -51,10 +54,16 @@ import "./Layout.less";
     <Header activeNav={activeNav} />
 
     <main class="main">
-      <!-- 横幅已整段删除 -->
+      {/* 横幅开关 */}
+      {HomeBanner.enable && <MainHeader />}
+
       <section
         class="main-inner"
-        style="padding-top:calc(66px + 0.68rem)"   <!-- 固定无横幅时的留白 -->
+        style={`padding-top:${
+          HomeBanner.enable
+            ? "0.88rem"
+            : "calc(66px + 0.68rem)"
+        }`}
       >
         <section class="main-inner-content">
           <slot />
@@ -69,7 +78,7 @@ import "./Layout.less";
 
     <script>
       import InitFn from "@/scripts/Init";
-      InitFn();   // 全局初始化
+      InitFn();
     </script>
   </body>
 </html>
