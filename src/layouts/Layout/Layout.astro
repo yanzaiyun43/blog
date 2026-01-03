@@ -2,7 +2,6 @@
 const { title, keywords, description, pagecover, activeNav, Home } = Astro.props;
 // 网站配置
 import SITE_INFO from "@/config";
-import { Fragment } from "astro"; // 修复：导入Fragment
 const { GoogleAds, Theme, HomeBanner } = SITE_INFO;
 const { ad_Client, asideAD_Slot, articleAD_Slot } = GoogleAds;
 // Head 依赖
@@ -28,7 +27,6 @@ import "./Layout.less";
 ---
 
 <html lang="zh-CN">
-	<!-- 修复：传参大小写对应 Head 组件的 Title/Keywords/PageCover -->
 	<Head Title={title} Keywords={keywords} Description={description} PageCover={pagecover}>
 		<!-- 谷歌广告JS加载项 -->
 		{ad_Client && (asideAD_Slot || articleAD_Slot) && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ad_Client}`} crossorigin="anonymous" />}
