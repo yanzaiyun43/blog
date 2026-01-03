@@ -81,9 +81,9 @@ top: true
 
 ::btn[Vercel 一键部署]{link="https://vercel.com/new/clone?repository-url=https://github.com/uxiaohan/vhAstro-Theme"}
 
-### Cloudflare Pages 自动部署
+### Cloudflare Pages 自动部署-修复了一个bug:点击上/下一篇无反应
 
-::btn[Cloudflare Pages 一键部署]{link="https://dash.cloudflare.com/?to=/:account/workers-and-pages/create/deploy-to-workers&repository=https://github.com/uxiaohan/vhAstro-Theme" type="warning"}
+::btn[Cloudflare Pages 一键部署]{link="https://dash.cloudflare.com/?to=/:account/workers-and-pages/create/deploy-to-workers&repository=https://github.com/yanzaiyun43/blog" type="warning"}
 
 其他更多部署方式（简简单单闭眼部署），请参考 [Astro 官方文档](https://docs.astro.build/en/guides/integrations-guide/cloudflare/)。
 
