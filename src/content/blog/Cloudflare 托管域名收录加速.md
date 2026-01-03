@@ -6,7 +6,7 @@ tags:
   - 域名
 
 id: "Domain-name-acceleration"
-cover: ""
+cover: "https://cf-assets.www.cloudflare.com/dzlvafdwdttg/69wNwfiY5mFmgpd9eQFW6j/d5131c08085a977aa70f19e7aada3fa9/1pixel-down__1_.svg"
 recommend: true
 ---
 
