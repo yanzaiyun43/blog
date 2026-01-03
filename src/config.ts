@@ -33,7 +33,7 @@ export default {
     const imgs = importAll(require.context('/assets/images/home', false, /\.(webp|png|jpg)$/));
     return `url('${imgs[Math.floor(Math.random() * imgs.length)]}') no-repeat center 60%/cover`;
   })()
-};
+},
   // 博客主题配置
   Theme: {
     // 颜色请用 16 进制颜色码
