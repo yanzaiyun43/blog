@@ -35,8 +35,8 @@ export default {
     background: (() => {
       // 数组里填 /assets/images/home 下的图片
       const homeImgs = [
-        'home-banner.webp',
-        'header03.jpg'
+        '1.png',
+        '2.png'
       ];
       const randomImg = homeImgs[Math.floor(Math.random() * homeImgs.length)];
       return `url('/assets/images/home/${randomImg}') no-repeat center 60%/cover`;
