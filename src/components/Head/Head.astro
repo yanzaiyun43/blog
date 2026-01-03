@@ -11,7 +11,7 @@ const SiteCover = Site + Cover;
 const WebCover = PageCover || SiteCover;
 // Schema.org 结构化数据（JSON-LD）
 const WebSiteData = { "@context": "https://schema.org", "@type": "WebSite", url: canonicalURL, name: WebTitle, description: Description, inLanguage: "zh-CN", image: WebCover, publisher: { "@type": "Organization", name: WebTitle, logo: { "@type": "ImageObject", url: SiteCover } } };
-const ArticleData = { "@context": "https://schema.org", "@type": "BlogPosting", mainEntityOfPage: { "@type": "WebPage", "@id": canonicalURL }, headline: WebTitle, description: Description, image: [WebCover], datePublished: new Date().toISOString().replace("Z", `+08:00`), dateModified: new Date().toISOString().replace("Z", `+08:00`), author: { "@type": "Person", name: Author, url: Site }, publisher: { "@type": "Organization", name: SiteName, logo: { "@type": "ImageObject", url: SiteCover } }, keywords: (Keywords || ["Astro", "分享", "博客"]).join(", ") };
+const ArticleData = { "@context": "https://schema.org", "@type": "BlogPosting", mainEntityOfPage: { "@type": "WebPage", "@id": canonicalURL }, headline: WebTitle, description: Description, image: [WebCover], datePublished: new Date().toISOString().replace("Z", `+08:00`), dateModified: new Date().toISOString().replace("Z", `+08:00`), author: { "@type": "Person", name: Author, url: Site }, publisher: { "@type": "Organization", name: SiteName, logo: { "@type": "ImageObject", url: SiteCover } }, keywords: (Keywords || ["旧识桥", "分享", "博客","cloudflare","开源阅读","日常","阅读"]).join(", ") };
 
 // 基础 样式
 import "@/styles/Base.less";
