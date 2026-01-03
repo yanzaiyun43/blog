@@ -1,95 +1,68 @@
 export default {
-  // 网站标题
+  // 网站基础信息
   Title: '旧识桥',
-  // 网站地址
   Site: 'https://167891.xyz',
-  // 网站副标题
   Subtitle: '什么都略懂一点，生活更多彩一些',
-  // 网站描述
   Description: '旧识桥博客，涵盖技术分享与干货输出，Astro静态站搭建、Cloudflare CDN优化、开源阅读推荐、博客搭建等等，简约的界面，内容精炼又有料。博客也分享作者的生活、音乐和旅行的热爱。',
-  // 网站作者
   Author: 'ailmel',
-  // 作者头像
   Avatar: 'https://img.167891.xyz/v2/lEEu0hA.png',
-  // 网站座右铭
   Motto: 'Cogito ergo sum.',
-  // Cover 网站缩略图
   Cover: '/assets/images/banner/072c12ec85d2d3b5.webp',
-  // 网站侧边栏公告 (不填写即不开启)
   Tips: '<p>欢迎光临我的博客 🎉</p><p>这里会分享我的日常和学习中的收集、整理及总结，希望能对你有所帮助:) 💖</p>',
-  // 首页打字机文案列表
   TypeWriteList: [
     '循此苦旅，终抵群星.',
     "Per aspera ad astra.",
   ],
-  // 网站创建时间
   CreateTime: '2025-12-31',
-  // 顶部 Banner 配置（全格式兼容，随机切换）
+
+  /* ======  顶部横幅（浏览器端随机）  ====== */
   HomeBanner: {
     enable: true,
-    // 首页高度
     HomeHeight: '38.88rem',
-    // 其他页面高度
     PageHeight: '28.88rem',
-    // 背景：支持webp/png/jpg，新增图片直接加数组里，打包无报错
-    background: (() => {
-      // 👇 这里填 /assets/images/home 下所有图片（带完整后缀，大小写小写）
-      const homeImgs = [
-        '1.png',
-        '2.png'
-      ];
-      const randomImg = homeImgs[Math.floor(Math.random() * homeImgs.length)];
-      return `url('/assets/images/home/${randomImg}') no-repeat center 60%/cover`;
-    })()
+    // 仅给出数组，不在 Node 端随机
+    images: [
+      '1.png',
+      '2.png'
+    ]
   },
-  // 博客主题配置
+
+  // 主题色
   Theme: {
-    // 颜色请用 16 进制颜色码
-    // 主题颜色
     "--vh-main-color": "#01C4B6",
-    // 字体颜色
     "--vh-font-color": "#34495e",
-    // 侧边栏宽度
     "--vh-aside-width": "318px",
-    // 全局圆角
     "--vh-main-radius": "0.88rem",
-    // 主体内容宽度
     "--vh-main-max-width": "1458px",
   },
-  // 导航栏 (新窗口打开 newWindow: true)
+
+  // 导航
   Navs: [
-    // 仅支持 SVG 且 SVG 需放在 public/assets/images/svg/ 目录下，填入文件名即可 <不需要文件后缀名>（封装了 SVG 组件 为了极致压缩 SVG）
-    // 建议使用 https://tabler.io/icons 直接下载 SVG
     { text: '朋友', link: '/links', icon: 'Nav_friends' },
     { text: '圈子', link: '/friends', icon: 'Nav_rss' },
     { text: '动态', link: '/talking', icon: 'Nav_talking' },
     { text: '昔日', link: '/archives', icon: 'Nav_archives' },
     { text: '留言', link: '/message', icon: 'Nav_message' },
     { text: '关于', link: '/about', icon: 'Nav_about' },
- //   { text: 'API', link: 'https://api.vvhan.com/', target: true, icon: 'Nav_link' },
   ],
-  // 侧边栏个人网站
+
+  // 侧边栏个人链接
   WebSites: [
-    // 仅支持 SVG 且 SVG 需放在 public/assets/images/svg/ 目录下，填入文件名即可 <不需要文件后缀名>（封装了 SVG 组件 为了极致压缩 SVG）
-    // 建议使用 https://tabler.io/icons 直接下载 SVG
     { text: 'Github', link: 'https://github.com/yanzaiyun43', icon: 'WebSite_github' },
     { text: 'API', link: 'https://ailmel.dpdns.org/', icon: 'WebSite_api' },
     { text: '联系我', link: 'mailto:ailmel@163.com', icon: 'email' },
     { text: '海阔图床', link: 'https://img.167891.xyz/', icon: 'WebSite_img' },
-    //    { text: 'HanAnalytics', link: 'https://analytics.vvhan.com', icon: 'WebSite_analytics' },
   ],
-  // 侧边栏展示
+
+  // 侧边栏开关
   AsideShow: {
-    // 是否展示个人网站
     WebSitesShow: true,
-    // 是否展示分类
     CategoriesShow: true,
-    // 是否展示标签
     TagsShow: true,
-    // 是否展示推荐文章
     recommendArticleShow: true
   },
-  // DNS预解析地址
+
+  // DNS 预解析
   DNSOptimization: [
     'https://i0.wp.com',
     'https://cn.cravatar.com',
@@ -98,44 +71,32 @@ export default {
     'https://registry.npmmirror.com',
     'https://pagead2.googlesyndication.com'
   ],
-  // 博客音乐组件解析接口
+
+  // 音乐接口
   vhMusicApi: 'https://vh-api.4ce.cn/blog/meting',
-  // 评论组件（只允许同时开启一个）
+
+  // 评论
   Comment: {
-    // Twikoo 评论
-    Twikoo: {
-      enable: false,
-      envId: ''
-    },
-    // Waline 评论
-    Waline: {
-      enable: false,
-      serverURL: ''
-    }
+    Twikoo: { enable: false, envId: '' },
+    Waline: { enable: false, serverURL: '' }
   },
-  // Han Analytics 统计（https://github.com/uxiaohan/HanAnalytics）
-//  HanAnalytics: { enable: true, server: 'https://analytics.vvhan.com', siteId: 'Hello-HanHexoBlog' },
-  // Google 广告
+
+  // 广告
   GoogleAds: {
- //   ad_Client: '', //ca-pub-xxxxxx
-    // 侧边栏广告(不填不开启)
-//    asideAD_Slot: `<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxxxxx" data-ad-slot="xxxxxx" data-ad-format="auto" data-full-width-responsive="true"></ins>`,
-    // 文章页广告(不填不开启)
-//    articleAD_Slot: `<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxxxxx" data-ad-slot="xxxxxx" data-ad-format="auto" data-full-width-responsive="true"></ins>`
+    // ad_Client: 'ca-pub-xxx',
+    // asideAD_Slot: `...`,
+    // articleAD_Slot: `...`
   },
-  // 文章内赞赏码
+
+  // 赞赏码
   Reward: {
-    // 支付宝收款码
     AliPay: '/assets/images/alipay.webp',
-    // 微信收款码
     WeChat: '/assets/images/wechat.webp'
   },
-  // 访问网页 自动推送到搜索引擎
-  SeoPush: {
-    enable: false,
-    serverApi: '',
-    paramsName: 'url'
-  },
-  // 页面阻尼滚动速度
+
+  // SEO 推送
+  SeoPush: { enable: false, serverApi: '', paramsName: 'url' },
+
+  // 滚动速度
   ScrollSpeed: 666
-}
+};
