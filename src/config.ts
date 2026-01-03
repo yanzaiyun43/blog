@@ -66,7 +66,7 @@ export default {
     // 建议使用 https://tabler.io/icons 直接下载 SVG
     { text: 'Github', link: 'https://github.com/yanzaiyun43', icon: 'WebSite_github' },
     { text: 'API', link: 'https://ailmel.dpdns.org/', icon: 'WebSite_api' },
-    { text: '联系我', link: 'mailto:ailmel@163.com', icon: 'WebSite_hot' },
+    { text: '联系我', link: 'mailto:ailmel@163.com', icon: 'email' },
     { text: '海阔图床', link: 'https://img.167891.xyz/', icon: 'WebSite_img' },
 //    { text: 'HanAnalytics', link: 'https://analytics.vvhan.com', icon: 'WebSite_analytics' },
   ],
