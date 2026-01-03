@@ -39,7 +39,7 @@ recommend: true
 - 用户代理：包含 Googlebot、Bingbot、Baiduspider、YandexBot
 部署位置：所有区域，保存后直接启用
 
-### 2.  额外安全配置（避免误拦）
+### 2.  额外安全配置
 - 关闭「Block IPs from high-risk countries」这类可能误拦爬虫的规则
 - 速率限制：给上面的搜索引擎爬虫设为「无限制」，防止触发频控
 - 爬虫控制：只开「AI爬网程序阻止」，「搜索引擎」保持允许状态（重点！）
