@@ -20,27 +20,19 @@ export default {
   // 首页打字机文案列表
   TypeWriteList: [
     '循此苦旅，终抵群星.',
-    "Per aspera ad astra.",
+    "Per asprera ad astra.",
   ],
   // 网站创建时间
   CreateTime: '2025-12-31',
-  // 顶部 Banner 配置（全格式兼容，随机切换）
+// 顶部 Banner 配置
   HomeBanner: {
     enable: true,
     // 首页高度
     HomeHeight: '38.88rem',
     // 其他页面高度
     PageHeight: '28.88rem',
-    // 背景：支持webp/png/jpg，新增图片直接加数组里，打包无报错
-    background: (() => {
-      // 数组里填 /assets/images/home 下的图片
-      const homeImgs = [
-        '1.png',
-        '2.png'
-      ];
-      const randomImg = homeImgs[Math.floor(Math.random() * homeImgs.length)];
-      return `url('/assets/images/home/${randomImg}') no-repeat center 60%/cover`;
-    })()
+    // 背景
+    background: "url('/assets/images/home-banner.webp') no-repeat center 60%/cover",
   },
   // 博客主题配置
   Theme: {
