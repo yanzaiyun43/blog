@@ -137,8 +137,6 @@ Sitemap: https://你的域名/sitemap-index.xml
 2.  主动提交（站长平台+请求索引），别等爬虫找上门
 3.  持续更文（原创+内链），给爬虫一个收录你的理由
 
-::btn[一键复制robots.txt完整版]{link="https://167891.xyz/robots.txt" type="success"}
-
 :::note{type="error"}
 本文由ai生成
 :::
