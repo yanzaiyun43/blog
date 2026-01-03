@@ -26,14 +26,14 @@ export default {
   CreateTime: '2025-12-31',
   // 顶部 Banner 配置
   HomeBanner: {
-    enable: true,
-    // 首页高度
-    HomeHeight: '38.88rem',
-    // 其他页面高度
-    PageHeight: '28.88rem',
-    // 背景
-    background: "url('/assets/images/home-banner.webp') no-repeat center 60%/cover",
-  },
+  enable: true,
+  HomeHeight: '38.88rem',
+  PageHeight: '28.88rem',
+  background: (() => {
+    const imgs = importAll(require.context('/assets/images/home', false, /\.(webp|png|jpg)$/));
+    return `url('${imgs[Math.floor(Math.random() * imgs.length)]}') no-repeat center 60%/cover`;
+  })()
+};
   // 博客主题配置
   Theme: {
     // 颜色请用 16 进制颜色码
