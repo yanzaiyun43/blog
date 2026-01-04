@@ -2,7 +2,7 @@ export default {
   // 网站标题
   Title: '旧识桥',
   // 网站地址
-  Site: 'https://167891.xyz',
+  Site: 'https://ailmel.top',
   // 网站副标题
   Subtitle: '什么都略懂一点，生活更多彩一些',
   // 网站描述
