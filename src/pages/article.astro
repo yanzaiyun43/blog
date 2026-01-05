@@ -1,0 +1,203 @@
+---
+import { getCollection } from "astro:content";
+import { fmtTime, getDescription } from "@/utils/index";
+import Layout from "@/layouts/Layout/Layout.astro";
+import getCover from "@/utils/getCover";
+import SITE_CONFIG from "@/config";
+
+const { Title, Site } = SITE_CONFIG;
+const pageTitle = "文章汇总 | " + Title;
+const pageDescription = "收录" + Site + "所有原创文章，按发布时间倒序排列";
+
+// 1. 获取所有文章并排序
+const posts = await getCollection("blog", ({ data }) => {
+  return data.published !== false;
+}).then(list => list.sort((a, b) => new Date(b.data.date) - new Date(a.data.date)));
+
+// 2. 提前处理每篇文章的封面图（关键修复：把 await 移到代码区）
+const postsWithCovers = await Promise.all(
+  posts.map(async (post) => ({
+    ...post,
+    coverUrl: post.data.cover ? await getCover(post.data.cover) : "",
+  }))
+);
+---
+
+<Layout 
+  title={pageTitle} 
+  keywords="文章列表,原创内容,技术分享" 
+  description={pageDescription}
+>
+  <div class="article-list-container vh-animation vh-animation-init">
+    <div class="article-list-header">
+      <h1>📚 文章汇总</h1>
+      <p class="subtitle">共 {postsWithCovers.length} 篇原创内容，持续更新中...</p>
+    </div>
+
+    <div class="article-list-grid">
+      {postsWithCovers.length > 0 ? (
+        postsWithCovers.map((post) => (
+          <a 
+            href={`/article/${post.data.id}`} 
+            class="article-card"
+            title={post.data.title}
+          >
+            {/* ✅ 修复后：直接用预生成的 coverUrl 变量，无 await */}
+            {post.coverUrl && (
+              <div class="article-card-cover">
+                <img 
+                  src={post.coverUrl} 
+                  alt={post.data.title + " 封面"}
+                  loading="lazy"
+                />
+              </div>
+            )}
+            <div class="article-card-content">
+              <span class="article-card-category">{post.data.categories}</span>
+              <h3 class="article-card-title">{post.data.title}</h3>
+              <p class="article-card-excerpt">
+                {post.data.summary || getDescription(post)}
+              </p>
+              <div class="article-card-meta">
+                <time>{fmtTime(post.data.date, "YYYY-MM-DD")}</time>
+                <span>
+                  {post.data.reading_time 
+                    ? parseFloat((Number(post.data.reading_time) || 0).toFixed(1).replace(/\.0+$/, "")) + "分钟" 
+                    : "5分钟"}
+                </span>
+              </div>
+            </div>
+          </a>
+        ))
+      ) : (
+        <div class="no-articles">
+          <p>暂无已发布的文章，快去创建第一篇吧！</p>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <style lang="less">
+    .article-list-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+
+      .article-list-header {
+        text-align: center;
+        margin-bottom: 3rem;
+
+        h1 {
+          font-size: 2.2rem;
+          margin-bottom: 0.8rem;
+          color: #2d3748;
+        }
+
+        .subtitle {
+          font-size: 1rem;
+          color: #718096;
+        }
+      }
+
+      .article-list-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .article-card {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        color: #2d3748;
+        text-decoration: none;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .article-card-cover {
+          height: 180px;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+          }
+
+          &:hover img {
+            transform: scale(1.05);
+          }
+        }
+
+        .article-card-content {
+          padding: 1.5rem;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+
+          .article-card-category {
+            padding: 0.3rem 0.6rem;
+            background: #f5fafe;
+            color: #4299e1;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+            width: fit-content;
+          }
+
+          .article-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+          }
+
+          .article-card-excerpt {
+            font-size: 0.95rem;
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }    
+          .article-card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #a0aec0;
+          }
+        }
+      }
+
+      .no-articles {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #718096;
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .article-list-container {
+        .article-list-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .article-card-cover {
+          height: 150px;
+        }
+      }
+    }
+  </style>
+</Layout>
