@@ -8,7 +8,7 @@ export default {
   // 网站描述
   Description: 'ailmel，旧识桥博客，涵盖技术分享与干货输出，Astro静态站搭建、Cloudflare CDN优化、开源阅读推荐、博客搭建等等，简约的界面，内容精炼又有料。博客也分享作者的生活、音乐和旅行的热爱。',
   // 网站作者
-  Author: 'ailmel',
+  Author: '𝓪𝓲𝓵𝓶𝓮𝓵',
   // 作者头像
   Avatar: '/assets/images/avatar.png',
   // 网站座右铭
