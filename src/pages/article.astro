@@ -1,20 +1,21 @@
 ---
+// src/pages/article.astro
 import { getCollection } from "astro:content";
 import { fmtTime, getDescription } from "@/utils/index";
 import Layout from "@/layouts/Layout/Layout.astro";
 import getCover from "@/utils/getCover";
 import SITE_CONFIG from "@/config";
 
-const { Title, Site } = SITE_CONFIG;
+// 页面配置
+const { Title, Site, Description } = SITE_CONFIG;
 const pageTitle = "文章汇总 | " + Title;
-const pageDescription = "收录" + Site + "所有原创文章，按发布时间倒序排列";
+const pageDescription = Description || "收录" + Site + "所有文章，按发布时间倒序排列";
 
-// 1. 获取所有文章并排序
+// 获取文章并处理封面
 const posts = await getCollection("blog", ({ data }) => {
   return data.published !== false;
 }).then(list => list.sort((a, b) => new Date(b.data.date) - new Date(a.data.date)));
 
-// 2. 提前处理每篇文章的封面图（关键修复：把 await 移到代码区）
 const postsWithCovers = await Promise.all(
   posts.map(async (post) => ({
     ...post,
@@ -25,179 +26,192 @@ const postsWithCovers = await Promise.all(
 
 <Layout 
   title={pageTitle} 
-  keywords="文章列表,原创内容,技术分享" 
+  keywords="文章列表,实用内容,技术分享" 
   description={pageDescription}
+  activeNav="article" // 匹配导航激活状态，若你的导航key不是article可自行修改
 >
-  <div class="article-list-container vh-animation vh-animation-init">
-    <div class="article-list-header">
-      <h1>📚 文章汇总</h1>
-      <p class="subtitle">共 {postsWithCovers.length} 篇原创内容，持续更新中...</p>
-    </div>
+  <section class="vh-container">
+    <!-- 文章列表主容器，复用归档页的动画和类名规范 -->
+    <section class="vh-archive-main vh-animation vh-animation-init">
+      <div class="archive-list article-list-custom">
+        <!-- 页面标题 -->
+        <div class="article-list-header">
+          <h1>文章汇总</h1>
+          <p class="subtitle">共 {postsWithCovers.length} 篇内容，持续更新中...</p>
+        </div>
 
-    <div class="article-list-grid">
-      {postsWithCovers.length > 0 ? (
-        postsWithCovers.map((post) => (
-          <a 
-            href={`/article/${post.data.id}`} 
-            class="article-card"
-            title={post.data.title}
-          >
-            {/* ✅ 修复后：直接用预生成的 coverUrl 变量，无 await */}
-            {post.coverUrl && (
-              <div class="article-card-cover">
-                <img 
-                  src={post.coverUrl} 
-                  alt={post.data.title + " 封面"}
-                  loading="lazy"
-                />
-              </div>
-            )}
-            <div class="article-card-content">
-              <span class="article-card-category">{post.data.categories}</span>
-              <h3 class="article-card-title">{post.data.title}</h3>
-              <p class="article-card-excerpt">
-                {post.data.summary || getDescription(post)}
-              </p>
-              <div class="article-card-meta">
-                <time>{fmtTime(post.data.date, "YYYY-MM-DD")}</time>
-                <span>
+        <!-- 文章列表 -->
+        {postsWithCovers.length > 0 ? (
+          postsWithCovers.map((post) => (
+            <div class="archive-list-item article-card-item">
+              <!-- 文章封面（可选） -->
+              {post.coverUrl && (
+                <div class="article-card-cover">
+                  <img 
+                    src={post.coverUrl} 
+                    alt={post.data.title + " 封面"}
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <!-- 文章链接和信息，复用归档页的布局结构 -->
+              <a href={`/article/${post.data.id}`} class="article-link-item">
+                <em class="date">{fmtTime(post.data.date, "MM-DD")}</em>
+                <i />
+                <span class="vh-ellipsis article-title">{post.data.title}</span>
+                <cite class="vh-ellipsis article-tags">
+                  {post.data.tags?.map((tag: string) => `#${tag}`).join(" ")}
+                </cite>
+                <!-- 分类标签 -->
+                <span class="article-category">{post.data.categories}</span>
+                <!-- 阅读信息 -->
+                <span class="article-meta">
                   {post.data.reading_time 
                     ? parseFloat((Number(post.data.reading_time) || 0).toFixed(1).replace(/\.0+$/, "")) + "分钟" 
-                    : "5分钟"}
+                    : "5分钟"} / 
+                  {post.data.article_word_count || "0"}字
                 </span>
-              </div>
+              </a>
             </div>
-          </a>
-        ))
-      ) : (
-        <div class="no-articles">
-          <p>暂无已发布的文章，快去创建第一篇吧！</p>
-        </div>
-      )}
-    </div>
-  </div>
+          ))
+        ) : (
+          <div class="no-articles">
+            <p>暂无已发布的文章，快去创建第一篇吧！</p>
+          </div>
+        )}
+      </div>
+    </section>
+  </section>
+</Layout>
 
-  <style lang="less">
-    .article-list-container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
+<!-- 样式：完全匹配你的项目less变量和样式规范 -->
+<style lang="less">
+  .article-list-custom {
+    .article-list-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--vh-border-color, #eee);
 
-      .article-list-header {
-        text-align: center;
-        margin-bottom: 3rem;
-
-        h1 {
-          font-size: 2.2rem;
-          margin-bottom: 0.8rem;
-          color: #2d3748;
-        }
-
-        .subtitle {
-          font-size: 1rem;
-          color: #718096;
-        }
+      h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--vh-font-main, #2d3748);
+        margin-bottom: 0.5rem;
       }
 
-      .article-list-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 2rem;
-      }
-
-      .article-card {
-        display: flex;
-        flex-direction: column;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        overflow: hidden;
-        color: #2d3748;
-        text-decoration: none;
-
-        &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
-
-        .article-card-cover {
-          height: 180px;
-          overflow: hidden;
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-          }
-
-          &:hover img {
-            transform: scale(1.05);
-          }
-        }
-
-        .article-card-content {
-          padding: 1.5rem;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-
-          .article-card-category {
-            padding: 0.3rem 0.6rem;
-            background: #f5fafe;
-            color: #4299e1;
-            border-radius: 4px;
-            margin-bottom: 0.8rem;
-            width: fit-content;
-          }
-
-          .article-card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
-          }
-
-          .article-card-excerpt {
-            font-size: 0.95rem;
-            color: #718096;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            flex: 1;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-          }    
-          .article-card-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: #a0aec0;
-          }
-        }
-      }
-
-      .no-articles {
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: 4rem 2rem;
-        color: #718096;
-        font-size: 1.1rem;
+      .subtitle {
+        font-size: 0.9rem;
+        color: var(--vh-font-66, #666);
       }
     }
 
-    @media (max-width: 768px) {
-      .article-list-container {
-        .article-list-grid {
-          grid-template-columns: 1fr;
+    .article-card-item {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background-color: var(--vh-white-color, #fff);
+      border-radius: 0.5rem;
+      box-shadow: var(--vh-box-shadow, 0 2px 8px rgba(0,0,0,0.08));
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      }
+
+      .article-card-cover {
+        width: 100%;
+        height: 180px;
+        border-radius: 0.3rem;
+        overflow: hidden;
+        margin-bottom: 1rem;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .article-link-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        color: var(--vh-font-main, #2d3748);
+        text-decoration: none;
+
+        .date {
+          font-size: 0.8rem;
+          color: var(--vh-font-66, #666);
         }
 
+        .article-title {
+          font-size: 1.2rem;
+          font-weight: 600;
+          line-height: 1.4;
+          margin: 0.3rem 0;
+          color: var(--vh-main-color, #4299e1);
+        }
+
+        .article-tags {
+          font-size: 0.8rem;
+          color: var(--vh-info, #9f7aea);
+        }
+
+        .article-category {
+          display: inline-block;
+          width: fit-content;
+          padding: 0.2rem 0.5rem;
+          background-color: var(--vh-main-color-16, rgba(66,153,225,0.16));
+          color: var(--vh-info, #4299e1);
+          border-radius: 0.2rem;
+          font-size: 0.75rem;
+          margin: 0.3rem 0;
+        }
+
+        .article-meta {
+          font-size: 0.8rem;
+          color: var(--vh-font-66, #666);
+          display: flex;
+          gap: 1rem;
+          margin-top: 0.5rem;
+
+          span {
+            &:first-child {
+              color: #E9B740;
+            }
+            &:last-child {
+              color: #3FA67F;
+            }
+          }
+        }
+      }
+    }
+
+    .no-articles {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--vh-font-66, #666);
+      font-size: 1.1rem;
+    }
+  }
+
+  /* 响应式适配，和文章详情页保持一致 */
+  @media screen and (max-width: 999px) {
+    .article-list-custom {
+      .article-card-item {
         .article-card-cover {
           height: 150px;
         }
+
+        .article-link-item {
+          .article-title {
+            font-size: 1.1rem;
+          }
+        }
       }
     }
-  </style>
-</Layout>
+  }
+</style>
