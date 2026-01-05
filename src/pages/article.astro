@@ -64,13 +64,6 @@ const postsWithCovers = await Promise.all(
                 </cite>
                 <!-- 分类标签 -->
                 <span class="article-category">{post.data.categories}</span>
-                <!-- 阅读信息 -->
-                <span class="article-meta">
-                  {post.data.reading_time 
-                    ? parseFloat((Number(post.data.reading_time) || 0).toFixed(1).replace(/\.0+$/, "")) + "分钟" 
-                    : "5分钟"} / 
-                  {post.data.article_word_count || "0"}字
-                </span>
               </a>
             </div>
           ))
