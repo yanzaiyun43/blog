@@ -5,64 +5,61 @@ import Layout from "@/layouts/Layout/Layout.astro";
 import getCover from "@/utils/getCover";
 import SITE_CONFIG from "@/config";
 
-// 页面基础配置（复用站点配置，保持风格统一）
 const { Title, Site } = SITE_CONFIG;
 const pageTitle = "文章汇总 | " + Title;
 const pageDescription = "收录" + Site + "所有原创文章，按发布时间倒序排列";
 
-// 获取所有 blog 集合的文章（过滤未发布+按日期倒序）
+// 1. 获取所有文章并排序
 const posts = await getCollection("blog", ({ data }) => {
-  // 只显示已发布的文章（如果你的文章有 published 字段，没有可删除这个过滤条件）
   return data.published !== false;
-}).then((list) => 
-  list.sort((a, b) => new Date(b.data.date) - new Date(a.data.date)) // 最新文章在前
+}).then(list => list.sort((a, b) => new Date(b.data.date) - new Date(a.data.date)));
+
+// 2. 提前处理每篇文章的封面图（关键修复：把 await 移到代码区）
+const postsWithCovers = await Promise.all(
+  posts.map(async (post) => ({
+    ...post,
+    coverUrl: post.data.cover ? await getCover(post.data.cover) : "",
+  }))
 );
 ---
 
-<!-- 复用现有 Layout，保持页面头部、导航、底部统一 -->
 <Layout 
   title={pageTitle} 
   keywords="文章列表,原创内容,技术分享" 
   description={pageDescription}
 >
   <div class="article-list-container vh-animation vh-animation-init">
-    <!-- 页面标题栏 -->
     <div class="article-list-header">
       <h1>📚 文章汇总</h1>
-      <p class="subtitle">共 {posts.length} 篇原创内容，持续更新中...</p>
+      <p class="subtitle">共 {postsWithCovers.length} 篇原创内容，持续更新中...</p>
     </div>
 
-    <!-- 文章列表主体 -->
     <div class="article-list-grid">
-      {posts.length > 0 ? (
-        posts.map((post) => (
+      {postsWithCovers.length > 0 ? (
+        postsWithCovers.map((post) => (
           <a 
             href={`/article/${post.data.id}`} 
             class="article-card"
             title={post.data.title}
           >
-            {/* 文章封面图（复用详情页的 getCover 工具，适配封面配置） */}
-            {post.data.cover && (
+            {/* ✅ 修复后：直接用预生成的 coverUrl 变量，无 await */}
+            {post.coverUrl && (
               <div class="article-card-cover">
                 <img 
-                  src={await getCover(post.data.cover)} 
+                  src={post.coverUrl} 
                   alt={post.data.title + " 封面"}
                   loading="lazy"
                 />
               </div>
             )}
-            {/* 文章核心信息 */}
             <div class="article-card-content">
               <span class="article-card-category">{post.data.categories}</span>
               <h3 class="article-card-title">{post.data.title}</h3>
               <p class="article-card-excerpt">
-                {/* 优先显示摘要，没有则显示文章描述（复用 getDescription 工具） */}
                 {post.data.summary || getDescription(post)}
               </p>
-              {/* 文章元信息（日期+阅读时间） */}
               <div class="article-card-meta">
                 <time>{fmtTime(post.data.date, "YYYY-MM-DD")}</time>
-                {/* 阅读时间从 remark 插件获取，没有则显示默认值 */}
                 <span>
                   {post.data.reading_time 
                     ? parseFloat((Number(post.data.reading_time) || 0).toFixed(1).replace(/\.0+$/, "")) + "分钟" 
@@ -73,7 +70,6 @@ const posts = await getCollection("blog", ({ data }) => {
           </a>
         ))
       ) : (
-        <!-- 无文章时的占位提示 -->
         <div class="no-articles">
           <p>暂无已发布的文章，快去创建第一篇吧！</p>
         </div>
@@ -81,7 +77,6 @@ const posts = await getCollection("blog", ({ data }) => {
     </div>
   </div>
 
-  <!-- 引入列表页专属样式（如果需要自定义样式，创建这个文件即可） -->
   <style lang="less">
     .article-list-container {
       max-width: 1200px;
@@ -149,8 +144,6 @@ const posts = await getCollection("blog", ({ data }) => {
           flex-direction: column;
 
           .article-card-category {
-            display: inline-block;
-            font-size: 0.8rem;
             padding: 0.3rem 0.6rem;
             background: #f5fafe;
             color: #4299e1;
@@ -176,8 +169,7 @@ const posts = await getCollection("blog", ({ data }) => {
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-          }
-
+          }    
           .article-card-meta {
             display: flex;
             justify-content: space-between;
@@ -196,7 +188,6 @@ const posts = await getCollection("blog", ({ data }) => {
       }
     }
 
-    /* 响应式适配 */
     @media (max-width: 768px) {
       .article-list-container {
         .article-list-grid {
