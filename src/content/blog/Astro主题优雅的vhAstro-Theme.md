@@ -1,8 +1,8 @@
 ---
-title: "Astro主题-优雅的vhAstro-Theme【使用文档】"
+title: "Astro主题-vhAstro-Theme【使用文档】"
 categories: Code
-tags: ["Astro", "主题", "博客", "vhAstro", "vhAstro-Theme"]
-id: "astro-theme-vhastro-theme"
+tags: ["Astro", "主题","vhAstro-Theme"]
+id: "vhastro-theme"
 date: 2025-12-30 22:21:18
 cover: "https://i0.wp.com/uxiaohan.github.io/v2/2025/04/1743737394560.webp"
 recommend: true
