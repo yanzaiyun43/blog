@@ -16,5 +16,5 @@ type: "links"
 name: 旧识桥
 link: https://167891.xyz/
 avatar: https://img.167891.xyz/v2/lEEu0hA.png
-desc: 我思故我在.
+desc: Per asprera ad astra.
 ```
