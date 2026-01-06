@@ -10,7 +10,7 @@ export default {
   // 网站作者
   Author: '𝓪𝓲𝓵𝓶𝓮𝓵',
   // 作者头像
-  Avatar: 'https://dorm426.xyz/api/v3/file/get/2/avatar.png?sign=-aO5H-zx5yfqrFu9mLHHcVi9x8uDnDhEsAcWFe7baNg%3D%3A0',
+  Avatar: 'https://p.cldisk.com/star4/c648fc285283b68e6e3a2e310b47b7cf/origin.jpg?rw=778&rh=778&_fileSize=563200&_orientation=1',
   // 网站座右铭
   Motto: 'Cogito ergo sum.',
   // Cover 网站缩略图
