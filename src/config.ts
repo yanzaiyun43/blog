@@ -10,7 +10,7 @@ export default {
   // 网站作者
   Author: '𝓪𝓲𝓵𝓶𝓮𝓵',
   // 作者头像
-  Avatar: 'https://img.167891.xyz/v2/3VHU8UR.png',
+  Avatar: 'https://img.167891.xyz/v2/esIJxlr.jpeg',
   // 网站座右铭
   Motto: 'Cogito ergo sum.',
   // Cover 网站缩略图
