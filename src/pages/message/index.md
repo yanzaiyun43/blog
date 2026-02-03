@@ -7,5 +7,6 @@ type: "message"
 ---
 
 :::note{type="info"}
-期待你的畅所欲言～
+不开放留言与评论～
+有事可与使用邮箱我联系ailmel@163.com
 :::
