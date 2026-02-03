@@ -38,9 +38,8 @@ recommend: true
 在开始批量处理之前，需要先搭建好 FFmpeg 的运行环境。
 
 **下载与安装 FFmpeg**
-
-- 访问 FFmpeg 官方网站下载页面。
 ::btn[FFmpeg 官网]{link="https://ffmpeg.org/"}
+- 访问 FFmpeg 官方网站下载页面。
 - 根据你的操作系统选择相应的版本下载。
 - 下载完成后，解压文件到一个你容易找到的目录，例如 `C:\ffmpeg`。
 - **配置环境变量**：为了让系统在任何位置都能识别 `ffmpeg` 命令，需要将其添加到系统环境变量 PATH 中。
