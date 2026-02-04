@@ -10,8 +10,7 @@ cover: ""
 recommend: true
 ---
 
-**关于Astro**：
-Astro 是专为**内容型网站**设计的静态站点生成器（SSG），用最少的 JavaScript 交付最快的页面。
+> **关于Astro**：Astro 是专为**内容型网站**设计的静态站点生成器（SSG），用最少的 JavaScript 交付最快的页面。
 
 **优势**：
 
