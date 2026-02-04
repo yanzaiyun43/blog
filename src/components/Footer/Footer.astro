@@ -3,25 +3,23 @@ import "./Footer.less";
 ---
 <footer class="vh-footer">
   <main>
-    <p>©2025 - {new Date().getFullYear()} 旧识桥 | 本站稳定运行 <span class="web_time"></span></p>
+    <p>©{new Date().getFullYear()} 旧识桥 | 本站稳定运行 <span class="web_time"></span></p>
     <p>
       <a href="/rss.xml" target="_blank">RSS订阅</a>
       <a href="/sitemap-index.xml" target="_blank">站点地图</a>
+      <span> | 总访客：<span id="visitor-count">加载中...</span></span>
+    </p>
+    <p>
       <a href="https://icp.gov.moe/?keyword=20260678" target="_blank">萌ICP备20260678号</a>
     </p>
   </main>
 </footer>
 
-<!-- 修复后的运行时间JS，加了加载监听+错误防护 -->
-<!-- 页脚运行时间（精确到秒） -->
+<!-- 运行时间 -->
 <script is:inline>
-  /* 1. 改成你的真实建站时刻（1月从 0 开始） */
-  const startDate = new Date(2025, 11, 30, 21, 08, 12); // 2025-12-30 14:25:30
-
-  /* 2. 补零函数 */
+  const startDate = new Date(2025, 11, 30, 21, 08, 12);
   const pad = n => n.toString().padStart(2, '0');
 
-  /* 3. 主逻辑 */
   document.addEventListener('DOMContentLoaded', () => {
     const el = document.querySelector('.web_time');
     if (!el) return;
@@ -32,11 +30,35 @@ import "./Footer.less";
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
-
       el.textContent = `${d}天${pad(h)}时${pad(m)}分${pad(s)}秒`;
     }
-
     update();
     setInterval(update, 1000);
+  });
+</script>
+
+<!-- 访客统计 -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 生成/读取访客ID（去重）
+    let visitorId = localStorage.getItem('visitorId');
+    if (!visitorId) {
+      visitorId = Math.random().toString(36).slice(2);
+      localStorage.setItem('visitorId', visitorId);
+    }
+
+    // 替换为你的 PHP 接口地址
+    fetch(`https://ailmel.dpdns.org/api/visit.php?api=1&visitorId=${visitorId}`)
+      .then(res => res.json())
+      .then(data => {
+        const countEl = document.getElementById('visitor-count');
+        if (countEl && data.total) {
+          countEl.textContent = data.total;
+        }
+      })
+      .catch(err => {
+        console.error('统计接口请求失败:', err);
+        document.getElementById('visitor-count').textContent = '获取失败';
+      });
   });
 </script>
