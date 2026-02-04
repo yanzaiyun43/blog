@@ -6,7 +6,7 @@ tags:
   - Astro
 
 id: "About-Astro"
-cover: "https://bing.img.run/rand.php"
+cover: "https://api.lolimi.cn/API/dmtx/fjpc"
 recommend: true
 top: true
 ---
