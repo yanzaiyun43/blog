@@ -48,7 +48,7 @@ import "./Footer.less";
     }
 
     // 替换为你的 PHP 接口地址
-    fetch(`https://ailmel.dpdns.org/api/visit.php?api=1&visitorId=${visitorId}`)
+    fetch(`https://ailmel.dpdns.org/visit.php?api=1&visitorId=${visitorId}`)
       .then(res => res.json())
       .then(data => {
         const countEl = document.getElementById('visitor-count');
