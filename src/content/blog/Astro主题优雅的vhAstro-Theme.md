@@ -5,8 +5,8 @@ tags: ["Astro", "主题","vhAstro-Theme"]
 id: "vhastro-theme"
 date: 2025-12-30 22:21:18
 cover: "https://i0.wp.com/uxiaohan.github.io/v2/2025/04/1743737394560.webp"
-recommend: fales
-top: true
+recommend: true
+top: false
 ---
 
 :::note{type="success"}
