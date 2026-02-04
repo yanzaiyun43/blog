@@ -1,5 +1,5 @@
 ---
-title: 什么是 Astro？
+title: 关于 Astro
 date: 2026-02-05 08:18:17
 categories: 教程
 tags:
@@ -10,7 +10,7 @@ cover: ""
 recommend: true
 ---
 
-> **关于Astro**：Astro 是专为**内容型网站**设计的静态站点生成器（SSG），用最少的 JavaScript 交付最快的页面。
+> Astro 是专为**内容型网站**设计的静态站点生成器（SSG），用最少的 JavaScript 交付最快的页面。
 
 **优势**：
 
