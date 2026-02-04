@@ -6,7 +6,7 @@ tags:
   - Astro
 
 id: "About-Astro"
-cover: ""
+cover: "https://bing.img.run/rand.php"
 recommend: true
 top: true
 ---
