@@ -8,6 +8,7 @@ tags:
 id: "About-Astro"
 cover: ""
 recommend: true
+top: true
 ---
 
 > Astro 是专为**内容型网站**设计的静态站点生成器（SSG），用最少的 JavaScript 交付最快的页面。
