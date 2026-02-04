@@ -44,14 +44,14 @@ node -v
 ## 🚀 三步创建项目
 
 :::note{type="success"}
-# 1. 执行创建命令（自动引导）
+### 1. 执行创建命令（自动引导）
 ```
 npm create astro@latest
 ```
-# 2. 按提示操作（推荐选择）：
-#   📁 项目名：`my-site`
-#   🎨 模板：`Just the basics（纯 Astro）`
-#   📦 安装依赖：`Yes`
+### 2. 按提示操作（推荐选择）：
+####   📁 项目名：`my-site`
+####   🎨 模板：`Just the basics（纯 Astro）`
+####   📦 安装依赖：`Yes`
 
 # 3. 进入项目 & 启动
 ```
