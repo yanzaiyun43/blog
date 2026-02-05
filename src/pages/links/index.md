@@ -11,10 +11,11 @@ type: "links"
 
 👭 排名不分先后，每次刷新 友链 会随机排列噢~
 :::
+> ailmel@163.com
 
 ```yaml
 name: 旧识桥
-link: https://167891.xyz/
+link: https://ailmel.top /
 avatar: https://img.167891.xyz/v2/lEEu0hA.png
 desc: Per asprera ad astra.
 ```
