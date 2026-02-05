@@ -675,7 +675,7 @@ server 支持：netease, tencent, kugou, xiami, baidu（默认值：netease） -
 ```
 
 ::vhMusic{id="1474697967"}
-::vhMusic{id="173901981" type="playlist"}
+::vhMusic{id="7795071646" type="playlist"}
 
 ### Video 组件
 
