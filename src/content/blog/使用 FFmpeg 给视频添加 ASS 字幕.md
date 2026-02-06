@@ -1,5 +1,5 @@
 ---
-title: 使用 FFmpeg 给视频添加 ASS 字幕教程
+title: 使用 FFmpeg 给视频添加 ASS 字幕
 date: 2026-02-02 22:28:24
 categories: 教程
 tags:
