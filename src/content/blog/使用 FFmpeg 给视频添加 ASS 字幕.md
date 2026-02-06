@@ -43,11 +43,9 @@ ffmpeg -i scene.mp4 -vf "ass=scene.ass" -c:a copy output.mp4
 
 ### 参数说明
 
-• **-vf "ass=scene.ass"**：将字幕渲染至视频帧，完整保留 ASS 样式与特效。
-
-• **-c:a copy**：音频流直通，不重编码，高效无损。
-
-• **output.mp4**：输出文件名为含硬字幕的成品。
+• `-vf "ass=scene.ass"`：将字幕渲染至视频帧，完整保留 ASS 样式与特效。
+• `-c:a copy`：音频流直通，不重编码，高效无损。
+• `output.mp4`：输出文件名为含硬字幕的成品。
 
 等待处理完成（进度实时显示），用播放器确认效果即可。
 
