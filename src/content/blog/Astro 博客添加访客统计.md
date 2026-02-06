@@ -1,5 +1,5 @@
 ---
-title: Astro 博客添加访客统计教程
+title: Astro 博客添加访客统计
 date: 2026-02-06 12:36:41
 categories: Code
 tags:
