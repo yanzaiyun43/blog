@@ -69,8 +69,8 @@ npm run dev
 ```
 my-site/
 ├── src/
-│   ├── pages/       ← **页面放这里！**（index.astro = 首页）
-│   ├── components/  ← **组件放这里**（可复用 UI）
+│   ├── pages/       ← 页面放这里！（index.astro = 首页）
+│   ├── components/  ← 组件放这里（可复用 UI）
 │   └── layouts/     ← 布局模板（如博客统一头尾）
 ├── public/          ← 静态资源（favicon.ico 直接丢这儿）
 ├── astro.config.mjs ← 配置文件（路由/集成等）
