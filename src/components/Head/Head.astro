@@ -11,7 +11,7 @@ const WebTitle = Title ? `${Title} | ${SiteName}` : `${SiteName} - ${Subtitle}`;
 const SiteCover = `${Site}${Cover}`;
 const WebCover = PageCover ? `${Site}${PageCover}` : SiteCover;
 // 固定关键词（按你要求，分词优化，SEO更友好）
-const finalKeywords = ["旧识桥", "旧识桥博客", "博客", "技术分享", "开源阅读", "cloudflare", "ailmel博客", "ailmel"];
+const finalKeywords = ["旧识桥", "旧识桥博客", "博客", "技术分享", "开源阅读", "ailmel官网", "ailmel博客", "ailmel"];
 // 日期优化：优先取文章传入日期，无则取当前时间（时区修正）
 const getFormatDate = (date?: string) => date ? new Date(date).toISOString().replace("Z", "+08:00") : new Date().toISOString().replace("Z", "+08:00");
 const pubDate = getFormatDate(datePublished);
