@@ -1,6 +1,6 @@
 export default {
   // API 接口请求优先，数据格式保持和 data 一致
-  api: 'https://ailmel.dpdns.org/API/link.php?apikey=23f2e4dfcd2e11704b7a29973b8a347765547a32678382f1800dcd49dd3e8bcd',
+  api: 'https://ailmel.dpdns.org/API/link.php',
   // api 为空则使用 data 静态数据
   data: [
     {
