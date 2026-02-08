@@ -65,7 +65,7 @@ export default {
     // 仅支持 SVG 且 SVG 需放在 public/assets/images/svg/ 目录下，填入文件名即可 <不需要文件后缀名>（封装了 SVG 组件 为了极致压缩 SVG）
     // 建议使用 https://tabler.io/icons 直接下载 SVG
     { text: 'Github', link: 'https://github.com/yanzaiyun43', icon: 'WebSite_github' },
-    { text: 'API', link: 'https://ailmel.dpdns.org/', icon: 'WebSite_api' },
+ //   { text: 'API', link: 'https://ailmel.dpdns.org/', icon: 'WebSite_api' },
     { text: '联系我', link: 'mailto:ailmel@163.com', icon: 'email' },
     { text: '海阔图床', link: 'https://img.167891.xyz/', icon: 'WebSite_img' },
     //    { text: 'HanAnalytics', link: 'https://analytics.vvhan.com', icon: 'WebSite_analytics' },
