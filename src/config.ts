@@ -12,7 +12,7 @@ export default {
   // 作者头像
   Avatar: 'https://img.167891.xyz/v2/3VHU8UR.png',
   // 网站座右铭
-  Motto: 'Cogito ergo sum.',
+  Motto: '什么都略懂一点，生活更多彩一些',
   // Cover 网站缩略图
   Cover: '/assets/images/home-banner.webp',
   // 网站侧边栏公告 (不填写即不开启)
