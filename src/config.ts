@@ -116,12 +116,12 @@ export default {
 //    articleAD_Slot: `<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxxxxx" data-ad-slot="xxxxxx" data-ad-format="auto" data-full-width-responsive="true"></ins>`
   },
   // 文章内赞赏码
-//  Reward: {
+  Reward: {
     // 支付宝收款码
 //    AliPay: '/assets/images/alipay.webp',
     // 微信收款码
 //    WeChat: '/assets/images/wechat.webp'
-//  },
+  },
   // 访问网页 自动推送到搜索引擎
   SeoPush: {
     enable: false,
