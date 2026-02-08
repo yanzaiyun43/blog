@@ -17,5 +17,5 @@ type: "links"
 name: 旧识桥
 link: https://ailmel.top /
 avatar: https://img.167891.xyz/v2/lEEu0hA.png
-desc: Per asprera ad astra.
+desc: 什么都略懂一点，生活更多彩一些
 ```
