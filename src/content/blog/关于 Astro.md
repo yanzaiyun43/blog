@@ -135,16 +135,13 @@ const now = new Date().toLocaleDateString('zh-CN');
 
 ---
 
-## 运行与构建（部署前必看）
+## 运行与构建
 
 | 命令 | 作用 | 适用场景 |
 | ------ |------ |------ |
 | `npm run dev` | **启动开发服务器** | 本地编写调试 |
 | `npm run build` | **生成静态文件** | 部署前执行 |
-| `npm run preview` | 预览构建结果 | 检查部署效果 |
-
-**构建后**：
-所有文件输出到 `dist/` 目录 → 直接拖到 Vercel/Netlify/GitHub Pages 即可上线！
+| `npm run preview` | **预览构建结果** | 检查部署效果 |
 
 ---
 
@@ -169,6 +166,5 @@ const now = new Date().toLocaleDateString('zh-CN');
 
 ---
 
-**Astro 的哲学很简单：内容为王，技术隐形。**
 你不需要成为框架专家，也能做出高性能网站。
 **现在，去创造属于你的网站吧** 
