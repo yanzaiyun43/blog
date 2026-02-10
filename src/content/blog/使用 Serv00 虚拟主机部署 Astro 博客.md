@@ -5,6 +5,7 @@ categories: 教程
 tags:
   - 虚拟主机
   - 搭建博客
+  - Astro
 
 id: "Deploy-blog"
 cover: ""
