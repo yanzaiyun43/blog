@@ -1,5 +1,5 @@
 ---
-title: 使用 Serv00 免费虚拟主机部署 Astro 博客
+title: 使用免费虚拟主机部署 Astro 博客
 date: 2026-02-10 18:39:24
 categories: 教程
 tags:
