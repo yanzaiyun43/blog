@@ -100,7 +100,6 @@ find ~/domains/你的域名/public_nodejs/public -type f -exec chmod 644 {} \;
 
 执行完以上所有命令，直接访问你的域名，即可正常打开 Astro 博客。
 
----
 
 **提示：** 请将教程中的"你的域名"替换为实际创建的域名，如 `example.serv00.com`。
 
