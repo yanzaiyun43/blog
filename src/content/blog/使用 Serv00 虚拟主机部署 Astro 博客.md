@@ -1,13 +1,11 @@
 ---
-title: 使用免费虚拟主机部署 Astro 博客
-date: 2026-02-10 18:39:24
+title: 使用 Serv00 免费虚拟主机部署 Astro 博客
+date: 2026-02-10 18:34:17
 categories: 教程
 tags:
-  - Astro
-  - 搭建博客
-  - Serv00
+  - 虚拟主机
 
-id: "Astro-blog-Serv00"
+id: "Deploy-blog"
 cover: ""
 recommend: true
 ---
@@ -73,7 +71,7 @@ npm run build
 
 ## 四、部署文件到网站目录
 
-Serv00 上 Node.js 站点的默认运行目录为：
+Serv00 上Node.js站点的默认运行目录为：
 `~/domains/你的域名/public_nodejs/public`
 
 我们需要将构建好的 `dist` 静态文件，复制到该目录：
@@ -103,5 +101,7 @@ find ~/domains/你的域名/public_nodejs/public -type f -exec chmod 644 {} \;
 
 **提示：** 请将教程中的"你的域名"替换为实际创建的域名，如 `example.serv00.com`。
 
-> 最后补充一点：在传统虚拟主机上手动更新静态博客，步骤较多、操作繁琐，长期维护并不方便。
+:::note{type="success"}
+补充一点：在传统虚拟主机上手动更新静态博客，步骤较多、操作繁琐，长期维护并不方便。
 如果你只是想专注写博客，更推荐使用 Vercel 或 Cloudflare Pages 这类平台，配合 GitHub 即可实现自动构建、一键部署，省心又稳定。
+:::
