@@ -11,6 +11,7 @@ id: "Astro-blog-Serv00"
 cover: ""
 recommend: true
 ---
+
 > 在虚拟主机上更新博客好麻烦的，已经转到Vercel了
 
 ## 一、Serv00 免费主机
