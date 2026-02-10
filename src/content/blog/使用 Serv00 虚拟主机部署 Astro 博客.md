@@ -4,6 +4,7 @@ date: 2026-02-10 18:34:17
 categories: 教程
 tags:
   - 虚拟主机
+  - 搭建博客
 
 id: "Deploy-blog"
 cover: ""
