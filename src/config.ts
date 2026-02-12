@@ -20,7 +20,7 @@ export default {
   // 首页打字机文案列表
   TypeWriteList: [
     '循此苦旅，终抵群星.',
-    "Per asprera ad astra.",
+    "Per aspera ad astra.",
   ],
   // 网站创建时间
   CreateTime: '2025-12-31',
