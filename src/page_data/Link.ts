@@ -17,7 +17,7 @@ export default {
     },
     {
         "name": "自由的博客",
-        "link": "https:\/\/blog.freenw.com",
+        "link": "https://freeblog.9net.ltd/",
         "avatar": "https:\/\/img.fastmirror.net\/s\/2025\/10\/02\/68de75caaf3fc.jpeg",
         "descr": "初中生技术爱好者的公益分享平台，聚焦技术、学习与成长干货。"
     },
