@@ -1,4 +1,3 @@
----
 import { getDescription, fmtTime } from "@/utils/index";
 import { getCollection } from "astro:content";
 import { render } from "astro:content";
@@ -22,18 +21,17 @@ const description = getDescription(post);
 const { Content, remarkPluginFrontmatter } = await render(post);
 // 文章字数和阅读时间 - 优化显示逻辑
 const { reading_time, article_word_count } = remarkPluginFrontmatter;
-// 处理字数：避免显示“一点字”，最少显示1字
-const formatWordCount = () => {
-  const count = Number(article_word_count) || 0;
-  return count > 0 ? count : 1;
-};
-// 处理阅读时间：避免显示0分钟，最少显示1分钟
-const formatReadingTime = () => {
-  const time = Number(reading_time) || 0;
-  // 保留1位小数，去掉末尾的.0，最少显示1分钟
-  const fixedTime = parseFloat(time.toFixed(1).replace(/\.0+$/, ""));
-  return fixedTime > 0 ? fixedTime : 1;
-};
+
+// 真实字数，没有则显示 1
+const realWordCount = Number(article_word_count) || 0;
+const showWordCount = realWordCount > 0 ? realWordCount : 1;
+
+// 真实阅读时间，没有则显示 1
+const realReadingTime = Number(reading_time) || 0;
+const showReadingTime = realReadingTime > 0
+  ? parseFloat(realReadingTime.toFixed(1).replace(/\.0+$/, ""))
+  : 1;
+
 // 公共 Layout
 import Layout from "@/layouts/Layout/Layout.astro";
 // Copyright 组件
@@ -61,8 +59,8 @@ import "@/styles/ArticleBase.less";
                                 <span class="article-meta-item">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M12 12h3.5"></path><path d="M12 7v5"></path></svg>
                                         <time>{fmtTime(post.data.date, "YYYY-MM-DD A")}</time>
-                                        <span class="count"><strong>{formatWordCount()}</strong>字</span>
-                                        <span class="time"><strong>{formatReadingTime()}</strong>分钟</span>
+                                        <span class="count"><strong>{showWordCount}</strong>字</span>
+                                        <span class="time"><strong>{showReadingTime}</strong>分钟</span>
                                 </span>
                                 <a class="article-meta-item" href={`/categories/${post.data.categories}`}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 6h16"></path><path d="M7 12h13"></path><path d="M10 18h10"></path></svg>
