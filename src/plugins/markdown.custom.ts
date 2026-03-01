@@ -1,11 +1,49 @@
 // src/plugins/remark-note.js
 import { visit } from 'unist-util-visit';
-import getReadingTime from 'reading-time';
 import { toString } from 'mdast-util-to-string';
+
+// 自定义中文友好的字数计算
+function calculateChineseReadingTime(text) {
+  // 移除 Markdown 语法
+  const plainText = text
+    .replace(/```[\s\S]*?```/g, '')     // 移除代码块
+    .replace(/`[^`]*`/g, '')           // 移除行内代码
+    .replace(/!\[.*?\]\(.*?\)/g, '')   // 移除图片
+    .replace(/\[.*?\]\(.*?\)/g, '')    // 移除链接
+    .replace(/#{1,6}\s*/g, '')         // 移除标题标记
+    .replace(/[*_~>`|\[\]()-]/g, '')   // 移除其他 Markdown 标记
+    .replace(/\s+/g, '')               // 移除所有空白
+    .trim();
+  
+  // 中文字数（按字符数计算）
+  const chineseCharCount = (plainText.match(/[\u4e00-\u9fa5]/g) || []).length;
+  const englishWordCount = (plainText.match(/[a-zA-Z]+/g) || []).length;
+  const otherCharCount = plainText.length - chineseCharCount - englishWordCount;
+  
+  // 总字数估算（中文1字=1，英文5字母=1字）
+  const totalWords = chineseCharCount + Math.ceil(englishWordCount * 0.2) + otherCharCount;
+  
+  // 阅读时间（300字/分钟）
+  const minutes = Math.max(1, Math.ceil(totalWords / 300));
+  
+  return {
+    words: totalWords,
+    minutes: minutes
+  };
+}
 
 // 处理标签
 const remarkNote = () => {
   return (tree: any, { data: astroData }: any) => {
+    // 在遍历之前计算一次总字数
+    const textOnPage = toString(tree);
+    const stats = calculateChineseReadingTime(textOnPage);
+    
+    // 设置到 frontmatter
+    astroData.astro.frontmatter.reading_time = stats.minutes;
+    astroData.astro.frontmatter.article_word_count = stats.words;
+    
+    // 然后进行节点遍历处理
     visit(tree, (node) => {
       const { type, name, attributes } = node;
       // 处理组件
@@ -27,18 +65,12 @@ const remarkNote = () => {
         }
         // 设置 class
         hProperties.class = `vh-node vh-${name}${attributes.type ? ` ${name}-${attributes.type}` : ''}`;
-        // 文章字数统计
-        const textOnPage = toString(tree);
-        const readingTime = getReadingTime(textOnPage);
-        astroData.astro.frontmatter.reading_time = readingTime.minutes
-        astroData.astro.frontmatter.article_word_count = readingTime.words
       }
     });
   };
 }
 
-
-//  处理 HTML 标签
+// 处理 HTML 标签（保持不变）
 const addClassNames = () => {
   return (tree: any) => {
     visit(tree, (node, index, parent) => {
@@ -64,8 +96,7 @@ const addClassNames = () => {
         }
       }
     });
-
   };
 }
 
-export { remarkNote, addClassNames } 
+export { remarkNote, addClassNames }
