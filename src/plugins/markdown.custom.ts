@@ -26,7 +26,7 @@ const remarkNote = () => {
           Object.keys(node.attributes).forEach((i: any) => (hProperties[`data-${i}`] = node.attributes[i]));
         }
         // 设置 class
-        hProperties.class = `vh-node vh-${name}${attributes.type ? ` ${name}-${attributes.type}` : ''};
+        hProperties.class = `vh-node vh-${name}${attributes.type ? ` ${name}-${attributes.type}` : ''}`;
         // 文章字数统计
         const textOnPage = toString(tree);
         const readingTime = getReadingTime(textOnPage);
