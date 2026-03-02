@@ -52,6 +52,12 @@ export default {
         "descr": "一个有意思的Blog，工作记录，日常分享，欢迎访问"
     },
     {
+        "name": "YUAN的个人主页",
+        "link": "https://www.upyi.cn/",
+        "avatar": "https://www.upyi.cn/images/icon.jpg",
+        "descr": "去AI化的个人主页，手工打磨的网页与文字"
+    },
+    {
         "name": "海阔图床",
         "link": "https:\/\/img.167891.xyz\/",
         "avatar": "https:\/\/img.167891.xyz\/v2\/lEEu0hA.png",
