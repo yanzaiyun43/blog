@@ -48,7 +48,7 @@ import "./Footer.less";
     let createTime = localStorage.getItem('visitorId_create_time');
 
     const now = Date.now();
-    const thirtyDays = 1 * 24 * 60 * 60 * 1000; // 1天的毫秒数
+    const oneDay = 24 * 60 * 60 * 1000; // 1天的毫秒数
 
     // 判断是否需要更新 visitorId
     let needNew = false;
@@ -56,7 +56,7 @@ import "./Footer.less";
       needNew = true;
     } else {
       const age = now - parseInt(createTime, 10);
-      if (age > thirtyDays) {
+      if (age > oneDay) {
         needNew = true;
       }
     }
@@ -69,12 +69,23 @@ import "./Footer.less";
       localStorage.setItem('visitorId_create_time', createTime);
     }
 
-    // 请求统计接口（替换成你自己的域名）
-    fetch(`https://ailmel.ct.ws/index.php?api=1&visitorId=${visitorId}`)
-      .then(res => res.json())
+    // 构建请求URL（确保没有多余字符）
+    const apiUrl = 'https://ailmel.ct.ws/index.php?api=1&visitorId=' + encodeURIComponent(visitorId);
+    
+    console.log('请求URL:', apiUrl); // 调试用
+
+    // 请求统计接口
+    fetch(apiUrl)
+      .then(res => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
       .then(data => {
-        if (data.total) {
+        console.log('响应数据:', data); // 调试用
+        if (data.total !== undefined) {
           countEl.textContent = data.total;
+        } else {
+          countEl.textContent = '数据错误';
         }
       })
       .catch(err => {
