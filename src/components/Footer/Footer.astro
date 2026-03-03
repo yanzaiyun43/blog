@@ -37,7 +37,7 @@ import "./Footer.less";
   });
 </script>
 
-<!-- 访客统计 -->
+<!-- 访客统计（每天自动更新 visitorId） -->
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     const countEl = document.getElementById('visitor-count');
@@ -48,8 +48,9 @@ import "./Footer.less";
     let createTime = localStorage.getItem('visitorId_create_time');
 
     const now = Date.now();
-    const thirtyDays = 1 * 24 * 60 * 60 * 1000; 
+    const thirtyDays = 1 * 24 * 60 * 60 * 1000; // 1天的毫秒数
 
+    // 判断是否需要更新 visitorId
     let needNew = false;
     if (!visitorId || !createTime) {
       needNew = true;
@@ -68,53 +69,17 @@ import "./Footer.less";
       localStorage.setItem('visitorId_create_time', createTime);
     }
 
-    const apiUrl = `https://ailmel.ct.ws/index.php?api=1&visitorId=${visitorId}`;
-    
-    // 设置请求超时（5秒）
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
-
-    // 请求统计接口 - 显式设置跨域模式
-    fetch(apiUrl, {
-      mode: 'cors',  // 必须设置为cors
-      signal: controller.signal,
-      // 可选：如果需要传递cookie，可以加上 credentials: 'include'
-      // credentials: 'include'
-    })
-      .then(res => {
-        clearTimeout(timeoutId);
-        if (!res.ok) {
-          throw new Error(`HTTP错误: ${res.status} ${res.statusText}`);
-        }
-        return res.json();
-      })
+    // 请求统计接口（替换成你自己的域名）
+    fetch(`https://ailmel.ct.ws/index.php?api=1&visitorId=${visitorId}`)
+      .then(res => res.json())
       .then(data => {
-        if (data.total !== undefined) {
+        if (data.total) {
           countEl.textContent = data.total;
-          // 缓存成功值以便后续使用
-          localStorage.setItem('lastVisitorCount', data.total);
-        } else {
-          countEl.textContent = '数据异常';
-          console.warn('统计接口返回数据格式异常:', data);
         }
       })
       .catch(err => {
-        clearTimeout(timeoutId);
-        if (err.name === 'AbortError') {
-          countEl.textContent = '请求超时';
-        } else if (err.message.includes('CORS') || err.message.includes('跨域')) {
-          countEl.textContent = '跨域错误';
-          console.error('跨域请求被阻止，请确保API服务器已正确配置CORS:', err);
-        } else {
-          countEl.textContent = '获取失败';
-        }
+        countEl.textContent = '获取失败';
         console.error('统计接口错误:', err);
-        
-        // 显示缓存的最后一次成功值
-        const cachedCount = localStorage.getItem('lastVisitorCount');
-        if (cachedCount) {
-          countEl.textContent = cachedCount + ' (缓存)';
-        }
       });
   });
 </script>
