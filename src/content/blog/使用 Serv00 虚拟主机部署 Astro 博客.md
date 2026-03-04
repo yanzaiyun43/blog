@@ -14,7 +14,6 @@ recommend: true
 ---
 
 > 由于在虚拟主机上更新博客麻烦，已经转到Vercel了
-最近因为 anubis 机器人验证导致访问麻烦，api 也无法使用
 
 ## 一、Serv00 免费主机
 
