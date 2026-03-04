@@ -1,6 +1,7 @@
 ---
 title: 使用 Serv00 免费虚拟主机部署 Astro 博客
 date: 2026-02-10 18:34:17
+updated: 2026-03-05 00:15:32
 categories: 教程
 tags:
   - 虚拟主机
@@ -12,7 +13,8 @@ cover: ""
 recommend: true
 ---
 
-> 在虚拟主机上更新博客好麻烦的，已经转到Vercel了
+> 由于在虚拟主机上更新博客麻烦，已经转到Vercel了
+最近因为 anubis 机器人验证导致访问麻烦，api 也无法使用
 
 ## 一、Serv00 免费主机
 
