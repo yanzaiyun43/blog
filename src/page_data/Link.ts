@@ -16,12 +16,6 @@ export default {
         "descr": "一起来绘制属于自己的星星！"
     },
     {
-        "name": "自由的博客",
-        "link": "https://freeblog.9net.ltd/",
-        "avatar": "https:\/\/img.fastmirror.net\/s\/2025\/10\/02\/68de75caaf3fc.jpeg",
-        "descr": "初中生技术爱好者的公益分享平台，聚焦技术、学习与成长干货。"
-    },
-    {
         "name": "龙腾万里sky的博客",
         "link": "https:\/\/blog.aiwanli.top",
         "avatar": "https:\/\/blog.aiwanli.top\/images\/avatar.jpg",
