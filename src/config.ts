@@ -10,7 +10,7 @@ export default {
   // 网站作者
   Author: '𝓪𝓲𝓵𝓶𝓮𝓵',
   // 作者头像
-  Avatar: 'https://img.167891.xyz/v2/3VHU8UR.png',
+  Avatar: 'https://img.ailmel.top/uploads/2026-03/20260330_d4f23d591b87ee84.png',
   // 网站座右铭
   Motto: '什么都略懂一点，生活更多彩一些',
   // Cover 网站缩略图
